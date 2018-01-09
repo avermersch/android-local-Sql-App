@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -41,8 +43,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //Définition de l'adapter de notre listView
         contactListView.setAdapter(contactAdapter);
 
+        //Définition d'un écouteur d'évènement pour OnItemClickListener
         contactListView.setOnItemClickListener(this);
+
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Ajout des entrées du fichier main_option_menu
+        //au menu contextuel de l'activité
+        getMenuInflater().inflate(R.menu.main_option_menu, menu);
+
+        return true;
+    }
+
+
+    //Gestion du choix d'un élément de menu
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mainMenuOptionDelete:
+
+                break;
+            case R.id.mainMenuOptionEdit:
+
+                break;
+        }
+
+        return true;
+    }
+
     /**
      * lancement de l'activité formulaire au clic sur un bouton
      * @param view
