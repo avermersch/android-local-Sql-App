@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l){
         this.selectedIndex = position;
         this.selectedPerson = contactList.get(position);
-        Toast.makeText(this, "Ligne" + " "+selectedPerson.get("firstName") +" " +"cliquée", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Ligne" + position +"cliquée", Toast.LENGTH_SHORT).show();
     }
 
 }
