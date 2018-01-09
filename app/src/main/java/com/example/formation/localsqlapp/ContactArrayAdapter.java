@@ -50,7 +50,7 @@ public class ContactArrayAdapter extends ArrayAdapter {
         nameTextView.setText(contactData.get("name"));
 
         TextView firstNameTextView = view.findViewById(R.id.listTextViewFirstname);
-        firstNameTextView.setText(contactData.get("firstName"));
+        firstNameTextView.setText(contactData.get("first_name"));
 
         TextView emailTextView = view.findViewById(R.id.listTextViewEmail);
         emailTextView.setText(contactData.get("email"));

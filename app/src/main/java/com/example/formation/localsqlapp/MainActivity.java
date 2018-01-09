@@ -65,16 +65,40 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     //Gestion du choix d'un élément de menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent Intention = new Intent(this, FormActivity.class);
         switch (item.getItemId()) {
             case R.id.mainMenuOptionDelete:
                 this.deleteSelectedContact();
                 break;
             case R.id.mainMenuOptionEdit:
-
+                this.editSelectedContact();
                 break;
         }
 
         return true;
+    }
+
+    //Affichage du formulaire de contact pour modification
+    private void editSelectedContact() {
+        //Création d'une intention
+        Intent intention = new Intent(this, FormActivity.class);
+
+        //Passage des paramètres à l'intention
+        intention.putExtra("name",this.selectedPerson.get("name"));
+        intention.putExtra("first_name", this.selectedPerson.get("first_name"));
+        intention.putExtra( "email", this.selectedPerson.get("email"));
+        intention.putExtra("id", this.selectedPerson.get("id"));
+
+        //Lancement de l'activité FormActivity
+        startActivityForResult(intention, 1);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 1 && resultCode ==RESULT_OK){
+            Toast.makeText(this,"Mise à jour effectuée", Toast.LENGTH_SHORT).show();
+            //Réinitialisation de la liste
+            this.contactListInit();
+        }
     }
 
     //Suppression du contact selectionné
@@ -127,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Map<String, String> contactCols = new HashMap<>();
             //Remplissage du tablleau associatif en fonction des données
             contactCols.put("name", cursor.getString(0));
-            contactCols.put("firstName",cursor.getString(1));
+            contactCols.put("first_name",cursor.getString(1));
             contactCols.put("email", cursor.getString(2));
             contactCols.put("id", cursor.getString(3));
 
