@@ -19,6 +19,7 @@ public class FormActivity extends AppCompatActivity {
     private TextView textViewPrenom;
     private TextView textViewEmail;
 
+    //private Button buttonValider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,9 @@ public class FormActivity extends AppCompatActivity {
         textViewNom = (TextView)findViewById(R.id.textView);
         textViewPrenom = (TextView)findViewById(R.id.textView1);
         textViewEmail = (TextView)findViewById(R.id.textView2);
+
+
+       // buttonValider = (TextView)findViewById(R.id.buttonValider);
 
 
     }
