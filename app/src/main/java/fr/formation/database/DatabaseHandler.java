@@ -12,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 
 
     private static final String DATABASE_NAME = "contact_database";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String CONTACT_TABLE_SQL = "CREATE TABLE contacts(" +
                                                         "id INTEGER PRIMARY KEY AUTOINCREMENT," +
