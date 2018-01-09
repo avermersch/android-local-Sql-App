@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(FormIntent);
     }
     private List<Map<String, String>> getAllContacts(){
-        //Instanciation
+        //Instanciation de la connexion à la base de données
         DatabaseHandler db = new DatabaseHandler(this);
 
         //Exécution de la requête de sélection
@@ -38,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
         //Instanciation de la liste qui recevra les données
         List<Map<String, String>> contactList = new ArrayList<>();
-        Map<String, String> contactCols = new HashMap<>();
+
 
         //Parcours du curseur
         while(cursor.moveToNext()){
+            Map<String, String> contactCols = new HashMap<>();
+            //Remplissage du tablleau associatif en fonction des données
             contactCols.put("name", cursor.getString(0));
             contactCols.put("firstName",cursor.getString(1));
             contactCols.put("email", cursor.getString(2));
