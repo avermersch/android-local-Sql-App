@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteException;
 
 import com.example.formation.localsqlapp.model.Contact;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ContactDAO {
     private DatabaseHandler db;
 
@@ -22,12 +25,9 @@ public class ContactDAO {
         //Instanciation d'un contact
         Contact contact = new Contact();
 
-        //Hydratation du contatc
+        //Hydratation du contact
         if(cursor.moveToNext()){
-            contact.setId(cursor.getLong(0));
-            contact.setName(cursor.getString(1));
-            contact.setFirst_name(cursor.getString(2));
-            contact.setEmail(cursor.getString(3));
+            contact = hydrateContact(cursor);
         }
 
         //Fermeture du curseur
@@ -35,4 +35,37 @@ public class ContactDAO {
 
         return contact;
     }
+
+    private Contact hydrateContact(Cursor cursor) {
+        Contact contact = new Contact();
+
+        contact.setId(cursor.getLong(0));
+        contact.setName(cursor.getString(1));
+        contact.setFirst_name(cursor.getString(2));
+        contact.setEmail(cursor.getString(3));
+
+        return contact;
+    }
+
+    /**
+     * @return List<Contact une liste de contacts
+     */
+    public List<Contact> findAll() throws SQLiteException{
+        //Instanciation de la liste des contacts
+        List<Contact> contactList = new ArrayList<>();
+
+        //Exection de la requête sql
+        String sql = "SELECT id, name, first_name, email FROM contacts";
+        Cursor cursor = this.db.getReadableDatabase().rawQuery(sql, null);
+        //Boucle sur le curseur
+        while(cursor.moveToNext()){
+            contactList.add(this.hydrateContact(cursor));
+        }
+
+        //Fermeture du curseur
+        cursor.close();
+
+        return contactList;
+    }
+
 }

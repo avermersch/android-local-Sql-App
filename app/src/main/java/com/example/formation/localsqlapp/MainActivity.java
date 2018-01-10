@@ -26,17 +26,25 @@ import fr.formation.database.DatabaseHandler;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView contactListView;
-    private List<Map<String, String>> contactList;
+    private List<Contact> contactList;
     private Integer selectedIndex;
-    private Map<String, String> selectedPerson;
+    private Contact selectedPerson;
     private final String LIFE_CYCLE = "cycledevie";
     private ContactArrayAdapter contactAdapter;
+
+    private DatabaseHandler db;
+    private ContactDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.i(LIFE_CYCLE, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Instanciation de la connexion de base de données
+        this.db = new DatabaseHandler(this);
+        //Instantciation du DAO pour les contacts
+        this.dao = new ContactDAO(this.db);
 
         //Référence au widget   ListView sur le layout
         contactListView = findViewById(R.id.contactListView);
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
     private void contactListInit() {
         //Récupération de la liste des contacts
-        contactList = this.getAllContacts();
+        contactList = this.dao.findAll();
 
         //Création d'un contactArrayAdapter
         contactAdapter = new ContactArrayAdapter(
@@ -120,10 +128,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Intent intention = new Intent(this, FormActivity.class);
 
         //Passage des paramètres à l'intention
-        intention.putExtra("name",this.selectedPerson.get("name"));
-        intention.putExtra("first_name", this.selectedPerson.get("first_name"));
-        intention.putExtra( "email", this.selectedPerson.get("email"));
-        intention.putExtra("id", this.selectedPerson.get("id"));
+        intention.putExtra("name",this.selectedPerson.getName());
+        intention.putExtra("first_name", this.selectedPerson.getFirst_name());
+        intention.putExtra( "email", this.selectedPerson.getEmail());
+        intention.putExtra("id", String.valueOf(this.selectedPerson.getId()));
 
         //Lancement de l'activité FormActivity
         startActivityForResult(intention, 1);
@@ -143,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             try{
                 //Définition de la requête sql et des paramètres
                 String sql = "DELETE FROM contacts WHERE id=?";
-                String[] params = {this.selectedPerson.get("id")};
+                String[] params = {String.valueOf(this.selectedPerson.getId())};
                 //Exécution de la requête
                 DatabaseHandler db = new DatabaseHandler(this);
                 db.getWritableDatabase().execSQL(sql, params);

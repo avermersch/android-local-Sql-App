@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.example.formation.localsqlapp.model.Contact;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +22,11 @@ import java.util.Map;
 public class ContactArrayAdapter extends ArrayAdapter {
 
     private Activity context;
-    private List<Map<String, String>> data;
+    private List<Contact> data;
     private LayoutInflater inflater;
 
     public ContactArrayAdapter(@NonNull Context context,
-                               @NonNull List<Map<String ,String>> data) {
+                               @NonNull List<Contact> data) {
 
         super(context, 0, data);
 
@@ -43,17 +45,17 @@ public class ContactArrayAdapter extends ArrayAdapter {
         View view = this.inflater.inflate(R.layout.contact_list_view, parent,false);
 
         //Récupération des données d'une ligne
-        Map<String, String> contactData = this.data.get(position);
+        Contact contactData = this.data.get(position);
 
         //Liaison entre les données et la vue
         TextView nameTextView = view.findViewById(R.id.listTextViewName);
-        nameTextView.setText(contactData.get("name"));
+        nameTextView.setText(contactData.getName());
 
         TextView firstNameTextView = view.findViewById(R.id.listTextViewFirstname);
-        firstNameTextView.setText(contactData.get("first_name"));
+        firstNameTextView.setText(contactData.getFirst_name());
 
         TextView emailTextView = view.findViewById(R.id.listTextViewEmail);
-        emailTextView.setText(contactData.get("email"));
+        emailTextView.setText(contactData.getEmail());
 
         return view;
     }
