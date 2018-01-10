@@ -13,11 +13,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.formation.localsqlapp.model.Contact;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fr.formation.database.ContactDAO;
 import fr.formation.database.DatabaseHandler;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         contactListView = findViewById(R.id.contactListView);
         contactListInit();
 
+        this.testDAO();
+
         //Récupération des données persistées dans le Bundle
         if(savedInstanceState != null){
             //Récupération de l'index de sélection de sauvegarde
@@ -52,6 +57,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
+    private void testDAO(){
+        try{
+            ContactDAO dao = new ContactDAO(new DatabaseHandler(this));
+            Contact contact = dao.findOneById(1);
+            if(contact.getName() == null){
+                Log.i("DAO", "Contact inconnu");
+            } else {
+                Log.i("DAO", contact.getName());
+            }
+
+        }catch (SQLiteException ex){
+            Log.i("DEBUG", ex.getMessage());
+        }
+
+    }
     private void contactListInit() {
         //Récupération de la liste des contacts
         contactList = this.getAllContacts();
