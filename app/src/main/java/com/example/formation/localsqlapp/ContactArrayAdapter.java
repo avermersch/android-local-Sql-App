@@ -57,4 +57,8 @@ public class ContactArrayAdapter extends ArrayAdapter {
 
         return view;
     }
+
+    public void setSelection(Integer selectedIndex) {
+    }
+
 }

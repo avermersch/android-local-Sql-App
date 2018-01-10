@@ -21,13 +21,12 @@ public class FormActivity extends AppCompatActivity {
     private EditText first_nameEditText;
     private EditText emailEditText;
     private String contactId;
-
     private Button buttonValider;
+
    /* private TextView textViewNom;
     private TextView textViewPrenom;
     private TextView textViewEmail;*/
 
-    //private Button buttonValider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,7 +107,7 @@ public class FormActivity extends AppCompatActivity {
                 ((EditText) findViewById(R.id.editTextNom)).setText("");
                 ((EditText) findViewById(R.id.editTextPrenom)).setText("");
                 ((EditText) findViewById(R.id.editTextEmail)).setText("");
-            }
+                }
         } catch (SQLiteException ex) {
             Log.e("SQL EXCEPTION", ex.getMessage());
             Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
