@@ -1,7 +1,6 @@
 package com.example.formation.localsqlapp;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,10 +14,8 @@ import android.widget.Toast;
 
 import com.example.formation.localsqlapp.model.Contact;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import fr.formation.database.ContactDAO;
 import fr.formation.database.DatabaseHandler;
@@ -132,12 +129,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void deleteSelectedContact(){
         if (this.selectedIndex != null){
             try{
-                //Définition de la requête sql et des paramètres
-                String sql = "DELETE FROM contacts WHERE id=?";
-                String[] params = {String.valueOf(this.selectedPerson.getId())};
-                //Exécution de la requête
-                DatabaseHandler db = new DatabaseHandler(this);
-                db.getWritableDatabase().execSQL(sql, params);
+             this.dao.deleteOneById(Long.valueOf(this.selectedIndex));
 
                 //Réinitialisation de la liste des contatcs
                 this.contactListInit();

@@ -68,4 +68,14 @@ public class ContactDAO {
         return contactList;
     }
 
+    /**
+     * Suppression d'un contact en fonction de sa clef primaire
+     * @param id
+     * @throws SQLiteException
+     */
+    public void deleteOneById(Long id) throws SQLiteException{
+        String[] params = {id.toString()};
+        String sql = "DELETE FROM contacts WHERE id=?";
+        this.db.getWritableDatabase().execSQL(sql, params);
+    }
 }

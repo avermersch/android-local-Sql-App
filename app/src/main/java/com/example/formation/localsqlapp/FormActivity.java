@@ -10,7 +10,6 @@ package com.example.formation.localsqlapp;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
-        import android.widget.TextView;
         import android.widget.Toast;
 
         import fr.formation.database.DatabaseHandler;
