@@ -129,7 +129,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void deleteSelectedContact(){
         if (this.selectedIndex != null){
             try{
-             this.dao.deleteOneById(Long.valueOf(this.selectedIndex));
+                Long id = this.selectedPerson.getId();
+             this.dao.deleteOneById(Long.valueOf(id));
 
                 //Réinitialisation de la liste des contatcs
                 this.contactListInit();
