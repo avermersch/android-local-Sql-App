@@ -79,8 +79,8 @@ public class FormActivity extends AppCompatActivity {
 
         //Définition des données à insérer
         ContentValues insertValues = new ContentValues();
-        insertValues.put("first_name", editTextNom);
-        insertValues.put("name", editTextPrenom);
+        insertValues.put("name", editTextNom);
+        insertValues.put("first_name", editTextPrenom);
         insertValues.put("email", editTextEmail);
 
         //Insertion des données
