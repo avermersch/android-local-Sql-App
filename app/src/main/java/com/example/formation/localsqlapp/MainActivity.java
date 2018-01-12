@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
      * @param view
      */
     public void onAddContact(View view) {
-            Intent FormIntent = new Intent(this.getBaseContext(), FormActivity.class) ;
+            Intent FormIntent = new Intent(this.getBaseContext(), FormActivity.class);
             startActivity(FormIntent);
     }
 

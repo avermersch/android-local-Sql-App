@@ -17,7 +17,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String CONTACT_TABLE_SQL = "CREATE TABLE contacts(" +
                                                         "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                                                         "name TEXT NOT NULL, "+
-                                                        "first_name TEXT, " +
+                                                        "first_name TEXT NOT NULL, "+
                                                         "email TEXT NOT NULL )";
 
     public DatabaseHandler(Context context) {
@@ -33,7 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         //supprime la table si existe
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS contacts");
-        //table re créer
+        //table se créer
         this.onCreate(sqLiteDatabase);
     }
 }

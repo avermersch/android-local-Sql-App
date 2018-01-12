@@ -56,13 +56,13 @@ public class FormActivity extends AppCompatActivity {
         //Récupération de l'id dans une variable globale
         this.contactId = id;
         //Référence aux editText
-        this.emailEditText = findViewById(R.id.editTextEmail);
         this.nameEditText = findViewById(R.id.editTextNom);
         this.first_nameEditText = findViewById(R.id.editTextPrenom);
+        this.emailEditText = findViewById(R.id.editTextEmail);
 
         //Afficher des données dans les champs de saisie
-        this.first_nameEditText.setText(first_name);
         this.nameEditText.setText(name);
+        this.first_nameEditText.setText(first_name);
         this.emailEditText.setText(email);
     }
 
@@ -77,7 +77,7 @@ public class FormActivity extends AppCompatActivity {
         //Instanciation de la base de données
         DatabaseHandler db = new DatabaseHandler(this);
 
-        //Définition desw données à insérer
+        //Définition des données à insérer
         ContentValues insertValues = new ContentValues();
         insertValues.put("first_name", editTextNom);
         insertValues.put("name", editTextPrenom);
